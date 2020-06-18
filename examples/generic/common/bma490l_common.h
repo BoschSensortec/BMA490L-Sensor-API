@@ -21,6 +21,14 @@ extern "C" {
  ****************************************************************************/
 
 /*!
+ *  @brief Function for initialization of I2C bus
+ *
+ *  @retval 0 -> Success
+ *  @retval < 0 -> Failure Info
+ */
+int8_t bma490l_user_i2c_init(void);
+
+/*!
  *  @brief Function for initialization of SPI bus
  *
  *  @retval 0 -> Success
@@ -46,6 +54,36 @@ void user_delay_us(uint32_t period_us, void *intf_ptr);
  *
  */
 void user_delay_ms(uint32_t period_ms);
+
+/*!
+ *  @brief This function is for reading the sensor's registers through I2C bus.
+ *
+ *  @param[in] reg_addr 	: Register address.
+ *  @param[out] reg_data    : Pointer to the data buffer to store the read data.
+ *  @param[in] length   	: No of bytes to read.
+ *  @param[in] intf_ptr 	: Pointer to interface.
+ *
+ *  @return Status of execution
+ *  @retval 0 -> Success
+ *  @retval < 0 -> Failure Info
+ *
+ */
+int8_t user_i2c_reg_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t length, void *intf_ptr);
+
+/*!
+ *  @brief This function is for writing the sensor's registers through I2C bus.
+ *
+ *  @param[in] reg_addr     : Register address.
+ *  @param[in] reg_data 	: Pointer to the data buffer whose data has to be written.
+ *  @param[in] length       : No of bytes to write.
+ *  @param[in] intf_ptr     : Pointer to interface.
+ *
+ *  @return Status of execution
+ *  @retval 0 -> Success
+ *  @retval < 0 -> Failure Info
+ *
+ */
+int8_t user_i2c_reg_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t length, void *intf_ptr);
 
 /*!
  *  @brief This function is for reading the sensor's registers through SPI bus.
